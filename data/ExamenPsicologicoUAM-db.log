@@ -1,0 +1,11 @@
+/*C5*/SET SCHEMA PUBLIC
+DISCONNECT
+/*C6*/SET SCHEMA PUBLIC
+create table Pregunta (id varchar(255) not null, enunciado varchar(1000), esEjemplo boolean not null, numero integer not null, opcionA varchar(1000), opcionB varchar(1000), opcionC varchar(1000), opcionD varchar(1000), opcionE varchar(1000), respuestaCorrecta varchar(1), cuestionario_id varchar(255) not null, primary key (id))
+alter table Pregunta add constraint FKuwro104sohwdl1bemkiuvhlm foreign key (cuestionario_id) references Cuestionario
+INSERT INTO CUESTIONARIO VALUES('8a80c0d69e8967e0019e896cd60d0000','Prueba de Comprensi\u00f3n Verbal BFA','A VECES UN GIGANTE NECESITA LOS SERVICIOS DE UN EN','Lea cada frase y seleccione la opci\u00f3n que mejor exprese su significado.','Comprensi\u00f3n Verbal')
+COMMIT
+INSERT INTO PREGUNTA VALUES('8a80c0d69e8967e0019e896d3eeb0001','SI LA TECNICA NOS HACE PERDER EL ESPIRITU, ES QUE NO MERECEMOS CONSERVARLO. (J. Rostand)',FALSE,2,'Si no dejamos invadir por la t\u00e9cnica estamos perdidos.','El esp\u00edritu y la t\u00e9cnica son irreconciliables.','Si el hombre se destruye por la t\u00e9cnica s\u00f3lo \u00e9l es responsable de su derrota.','','','c','8a80c0d69e8967e0019e896cd60d0000')
+COMMIT
+INSERT INTO PREGUNTA VALUES('8a80c0d69e8967e0019e896d9a1e0002','A VECES UN GIGANTE NECESITA LOS SERVICIOS DE UN ENANO.',TRUE,1,'El \u00e9xito es a menudo dif\u00edcil de prever.','A menudo se tiene necesidad de alguien inferior a uno.','Dar es una cosa f\u00e1cil.','','','','8a80c0d69e8967e0019e896cd60d0000')
+COMMIT

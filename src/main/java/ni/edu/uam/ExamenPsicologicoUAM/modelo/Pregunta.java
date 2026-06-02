@@ -1,0 +1,54 @@
+package ni.edu.uam.ExamenPsicologicoUAM.modelo;
+
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import org.hibernate.annotations.GenericGenerator;
+import org.openxava.annotations.Hidden;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+
+@Entity
+@Getter @Setter @AllArgsConstructor @NoArgsConstructor
+public class Pregunta {
+
+    @Id
+    @GeneratedValue(generator = "system-uuid")
+    @GenericGenerator(name = "system-uuid", strategy = "uuid")
+    @Hidden
+    private String id;
+
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    private Cuestionario cuestionario;
+
+    private int numero;
+
+    @Column(length = 1000)
+    private String enunciado;
+
+    @Column(length = 1000)
+    private String opcionA;
+
+    @Column(length = 1000)
+    private String opcionB;
+
+    @Column(length = 1000)
+    private String opcionC;
+
+    @Column(length = 1000)
+    private String opcionD;
+
+    @Column(length = 1000)
+    private String opcionE;
+
+    @Column(length = 1)
+    private String respuestaCorrecta;
+
+    private boolean esEjemplo;
+}
