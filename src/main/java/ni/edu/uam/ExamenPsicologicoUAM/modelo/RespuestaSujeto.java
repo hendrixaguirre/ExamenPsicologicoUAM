@@ -30,5 +30,6 @@ public class RespuestaSujeto {
     @Column(length = 1)
     private String respuestaSeleccionada;
 
+
     private boolean correcta;
 }
