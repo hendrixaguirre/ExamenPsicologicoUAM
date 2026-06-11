@@ -8,30 +8,27 @@ import org.hibernate.annotations.GenericGenerator;
 import org.openxava.annotations.Hidden;
 
 import javax.persistence.*;
-import java.time.LocalDate;
 
 @Entity
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class Sujeto {
-
+public class RespuestaSujeto {
     @Id
     @GeneratedValue(generator = "system-uuid")
     @GenericGenerator(name = "system-uuid", strategy = "uuid")
     @Hidden
-
     private String id;
-    private String nombre;
-    private String primerApellido;
-    private String segundoApellido;
-    private LocalDate fechaNacimiento;
-    private int edad;
 
-    private String sexo;
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    private AplicacionPrueba aplicacionPrueba;
 
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    private Pregunta pregunta;
 
-    private String estudiosRealizados;
-    private String profesion;
+    @Column(length = 1)
+    private String respuestaSeleccionada;
+
+    private boolean correcta;
 }
