@@ -15,6 +15,7 @@ import javax.persistence.*;
 @NoArgsConstructor
 @AllArgsConstructor
 public class RespuestaSujeto {
+
     @Id
     @GeneratedValue(generator = "system-uuid")
     @GenericGenerator(name = "system-uuid", strategy = "uuid")
@@ -30,6 +31,10 @@ public class RespuestaSujeto {
     @Column(length = 1)
     private String respuestaSeleccionada;
 
-
-    private boolean correcta;
+    @Transient
+    public boolean isCorrecta() {
+        if (pregunta == null || respuestaSeleccionada == null) return false;
+        if (pregunta.isEsEjemplo()) return false;
+        return respuestaSeleccionada.equalsIgnoreCase(pregunta.getRespuestaCorrecta());
+    }
 }

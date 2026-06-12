@@ -9,15 +9,15 @@ import org.openxava.annotations.Hidden;
 
 import javax.persistence.*;
 import java.time.LocalDate;
-import java.time.LocalTime;
+import java.time.LocalDateTime;
 
 @Entity
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-
 public class AplicacionPrueba {
+
     @Id
     @GeneratedValue(generator = "system-uuid")
     @GenericGenerator(name = "system-uuid", strategy = "uuid")
@@ -31,10 +31,8 @@ public class AplicacionPrueba {
     private Cuestionario cuestionario;
 
     private LocalDate fechaAplicacion;
+    private LocalDateTime horaInicio;
 
-    private LocalTime horaInicio;
-
-    private LocalTime horaFin;
-
-    private boolean finalizada;
+    @Enumerated(EnumType.STRING)
+    private EstadoAplicacion estado;
 }
