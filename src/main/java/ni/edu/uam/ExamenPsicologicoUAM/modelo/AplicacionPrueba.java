@@ -8,10 +8,15 @@ import org.hibernate.annotations.GenericGenerator;
 import org.openxava.annotations.Hidden;
 
 import javax.persistence.*;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Entity
-@Getter @Setter @AllArgsConstructor @NoArgsConstructor
-public class Pregunta {
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+public class AplicacionPrueba {
 
     @Id
     @GeneratedValue(generator = "system-uuid")
@@ -20,22 +25,14 @@ public class Pregunta {
     private String id;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    private Sujeto sujeto;
+
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
     private Cuestionario cuestionario;
 
-    private int numero;
+    private LocalDate fechaAplicacion;
+    private LocalDateTime horaInicio;
 
-    @Column(length = 1000)
-    private String enunciado;
-
-    @Column(length = 1000)
-    private String opcionA;
-    @Column(length = 1000)
-    private String opcionB;
-    @Column(length = 1000)
-    private String opcionC;
-
-    @Column(length = 1)
-    private String respuestaCorrecta;
-
-    private boolean esEjemplo;
+    @Enumerated(EnumType.STRING)
+    private EstadoAplicacion estado;
 }
