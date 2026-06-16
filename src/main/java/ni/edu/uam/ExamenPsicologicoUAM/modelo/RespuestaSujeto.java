@@ -9,6 +9,11 @@ import org.openxava.annotations.Hidden;
 
 import javax.persistence.*;
 
+/**
+ * Representa la contestación que da el sujeto a una pregunta dentro de una
+ * aplicación. El acierto no se almacena: se calcula comparando la opción
+ * elegida con la clave de la pregunta.
+ */
 @Entity
 @Getter
 @Setter
@@ -31,6 +36,13 @@ public class RespuestaSujeto {
     @Column(length = 1)
     private String respuestaSeleccionada;
 
+    /**
+     * Determina si la respuesta es un acierto, comparando la letra elegida
+     * con la respuestaCorrecta de la pregunta asociada. Valor calculado:
+     * no se almacena. El ejercicio de ejemplo no puntúa.
+     *
+     * @return true si la opción elegida coincide con la clave; false en otro caso.
+     */
     @Transient
     public boolean isCorrecta() {
         if (pregunta == null || respuestaSeleccionada == null) return false;

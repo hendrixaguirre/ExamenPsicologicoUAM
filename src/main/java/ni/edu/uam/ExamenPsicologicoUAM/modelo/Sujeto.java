@@ -12,6 +12,10 @@ import javax.persistence.*;
 import java.time.LocalDate;
 import java.time.Period;
 
+/**
+ * Representa a la persona evaluada. Almacena sus datos de identificación y
+ * demográficos. La edad no se almacena: se calcula a partir de fechaNacimiento.
+ */
 @Entity
 @Getter
 @Setter
@@ -36,6 +40,12 @@ public class Sujeto {
     private String estudiosRealizados;
     private String profesion;
 
+    /**
+     * Calcula la edad del sujeto a partir de su fecha de nacimiento.
+     * Valor derivado: no se almacena en la base de datos.
+     *
+     * @return edad en años cumplidos; 0 si no hay fecha de nacimiento.
+     */
     @Transient
     @Depends("fechaNacimiento")
     public int getEdad() {

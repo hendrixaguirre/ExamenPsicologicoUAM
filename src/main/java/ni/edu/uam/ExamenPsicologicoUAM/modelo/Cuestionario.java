@@ -12,6 +12,11 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
+/**
+ * Representa una prueba de la BFA de forma genérica; en este caso, la de
+ * Comprensión Verbal. Funciona como contenedor de la información general del
+ * test (nombre, descripción, instrucciones y ejemplo) y agrupa sus preguntas.
+ */
 @Entity
 @Getter
 @Setter
@@ -35,4 +40,3 @@ public class Cuestionario {
 
     private String ejemplo;
 }
-

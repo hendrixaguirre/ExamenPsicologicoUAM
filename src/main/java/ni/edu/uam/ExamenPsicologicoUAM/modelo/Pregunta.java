@@ -9,6 +9,11 @@ import org.openxava.annotations.Hidden;
 
 import javax.persistence.*;
 
+/**
+ * Representa cada ejercicio que compone un cuestionario: el proverbio a
+ * interpretar, sus tres opciones (A, B, C), la clave correcta y si se trata
+ * del ejemplo introductorio que no puntúa.
+ */
 @Entity
 @Getter @Setter @AllArgsConstructor @NoArgsConstructor
 public class Pregunta {
