@@ -21,6 +21,30 @@
     <load-on-startup>3</load-on-startup>
   </servlet>
 
+  <!-- Entrega las preguntas (sin clave) e inicia la aplicación -->
+  <servlet>
+    <servlet-name>IniciarPrueba</servlet-name>
+    <servlet-class>ni.edu.uam.ExamenPsicologicoUAM.web.IniciarPruebaServlet</servlet-class>
+  </servlet>
+
+  <!-- Recibe las respuestas, califica y devuelve el resultado -->
+  <servlet>
+    <servlet-name>CalificarPrueba</servlet-name>
+    <servlet-class>ni.edu.uam.ExamenPsicologicoUAM.web.CalificarPruebaServlet</servlet-class>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>jsp</servlet-name>
+    <url-pattern>*.jsp</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>IniciarPrueba</servlet-name>
+    <url-pattern>/api/iniciar</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>CalificarPrueba</servlet-name>
+    <url-pattern>/api/calificar</url-pattern>
+  </servlet-mapping>
 
   <!-- Para cumplir con OWASP -->
   <error-page>

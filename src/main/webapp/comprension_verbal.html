@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Comprensión Verbal · BFA</title>
+<link rel="stylesheet" href="comprension_verbal.css">
+</head>
+<body>
+
+<div class="timebar" aria-hidden="true"><div class="timebar__fill" id="timebarFill"></div></div>
+
+<main class="wrap">
+
+<!-- ===================== PANTALLA 1: INSTRUCCIONES ===================== -->
+<section class="screen active" id="screenIntro" aria-labelledby="introTitle">
+  <p class="kicker reveal" data-i="0">Batería Factorial de Aptitudes · Prueba C.V.</p>
+  <h1 class="reveal" data-i="1" id="introTitle">Comprensión <em>Verbal</em></h1>
+
+  <p class="lede reveal" data-i="2">Encontrará una serie de pensamientos o proverbios de autores clásicos y contemporáneos, cada uno acompañado de tres opciones (A, B y C). <strong>Elija la opción cuya significación más se aproxima, o menos se separa, del pensamiento principal.</strong></p>
+  <p class="lede reveal" data-i="3">Dé una sola respuesta por ejercicio. Si no encuentra la solución, pase al siguiente: puede volver a intentarlo al final si dispone de tiempo.</p>
+
+  <div class="rules reveal" data-i="4" role="list">
+    <div class="rule" role="listitem"><div class="rule__num">15:00</div><div class="rule__cap">minutos de duración</div></div>
+    <div class="rule" role="listitem"><div class="rule__num">30</div><div class="rule__cap">ejercicios calificables</div></div>
+    <div class="rule" role="listitem"><div class="rule__num">A · B · C</div><div class="rule__cap">una respuesta por ejercicio</div></div>
+  </div>
+
+  <div class="example reveal" data-i="5">
+    <p class="example__tag">Ejemplo resuelto</p>
+    <p class="proverb">A veces un gigante necesita los servicios de un enano.</p>
+    <div class="example__opt"><span class="l">A</span><span>El éxito es a menudo difícil de prever.</span></div>
+    <div class="example__opt correct"><span class="l">B</span><span>A menudo se tiene necesidad de alguien inferior a uno. ✓</span></div>
+    <div class="example__opt"><span class="l">C</span><span>Dar es una cosa fácil.</span></div>
+    <p class="example__note">La opción B es la correcta: es la que más se aproxima al sentido del pensamiento principal.</p>
+  </div>
+
+  <div class="sujeto reveal" data-i="6">
+    <p class="sujeto__title">Datos del evaluado</p>
+    <div class="field-grid">
+      <div class="field"><label for="fNombre">Nombre</label><input id="fNombre" type="text" autocomplete="off"></div>
+      <div class="field"><label for="fPrimerApellido">Primer apellido</label><input id="fPrimerApellido" type="text" autocomplete="off"></div>
+      <div class="field"><label for="fSegundoApellido">Segundo apellido</label><input id="fSegundoApellido" type="text" autocomplete="off"></div>
+      <div class="field"><label for="fFechaNacimiento">Fecha de nacimiento</label><input id="fFechaNacimiento" type="date"></div>
+      <div class="field"><label for="fSexo">Sexo</label><select id="fSexo">
+        <option value="">—</option>
+        <option value="MASCULINO">Masculino</option>
+        <option value="FEMENINO">Femenino</option>
+        <option value="PREFIERO_NO_DECIRLO">Prefiero no decirlo</option>
+      </select></div>
+      <div class="field"><label for="fEstudios">Estudios realizados</label><input id="fEstudios" type="text" autocomplete="off"></div>
+      <div class="field field--full"><label for="fProfesion">Profesión</label><input id="fProfesion" type="text" autocomplete="off"></div>
+    </div>
+  </div>
+
+  <p class="lede reveal" data-i="7">El cronómetro inicia al pulsar el botón. Al agotarse el tiempo, la prueba se envía automáticamente.</p>
+  <p class="reveal" data-i="8"><button class="btn btn--primary" id="btnStart">Comenzar la prueba</button></p>
+</section>
+
+<!-- ===================== PANTALLA 2: PRUEBA ===================== -->
+<section class="screen" id="screenTest">
+  <div class="testbar">
+    <span class="testbar__label">Comprensión Verbal</span>
+    <span class="clock" id="clock" role="timer" aria-label="Tiempo restante">15:00</span>
+  </div>
+
+  <div class="qcard" id="qCard" aria-live="polite">
+    <div class="folio" id="folio" aria-hidden="true">01</div>
+    <div class="q-meta">
+      <span class="q-count" id="qCount">Ejercicio 01 / 30</span>
+      <span class="q-skip-hint">Puede saltar y volver a cualquier ejercicio</span>
+    </div>
+    <p class="proverb" id="qText"></p>
+    <p class="proverb__author" id="qAuthor"></p>
+    <div class="options" id="qOptions" role="radiogroup" aria-label="Opciones de respuesta"></div>
+  </div>
+
+  <div class="nav-row">
+    <button class="btn btn--ghost" id="btnPrev">← Anterior</button>
+    <span class="spacer"></span>
+    <button class="btn btn--ghost" id="btnNext">Siguiente →</button>
+    <button class="btn btn--pen" id="btnFinish">Finalizar prueba</button>
+  </div>
+
+  <div class="qmap-wrap">
+    <p class="qmap-title">Hoja de respuestas</p>
+    <nav class="qmap" id="qMap" aria-label="Mapa de ejercicios"></nav>
+    <p class="qmap__legend">Los ejercicios respondidos se marcan en azul. Pulse un número para ir a ese ejercicio.</p>
+  </div>
+</section>
+
+<!-- ===================== PANTALLA 3: RESULTADOS ===================== -->
+<section class="screen" id="screenResult" aria-labelledby="resultTitle">
+  <p class="kicker reveal" data-i="0">Resultado de la prueba</p>
+  <h1 class="reveal" data-i="1" id="resultTitle">Comprensión <em>Verbal</em></h1>
+  <p class="reveal" data-i="2"><span class="timeout-note" id="timeoutNote" hidden>Enviada automáticamente al agotarse el tiempo</span></p>
+
+  <div class="result-grid reveal" data-i="3">
+    <div class="gauge" role="img" id="gaugeWrap" aria-label="Percentil obtenido">
+      <svg width="200" height="200" viewBox="0 0 200 200">
+        <circle class="gauge__track" cx="100" cy="100" r="88"/>
+        <circle class="gauge__fill" id="gaugeFill" cx="100" cy="100" r="88"/>
+      </svg>
+      <div class="gauge__center">
+        <span class="gauge__num" id="rPC">1</span>
+        <span class="gauge__cap">Percentil</span>
+      </div>
+    </div>
+    <div class="rstats">
+      <div class="rstat"><span class="rstat__label">Puntuación directa (aciertos)</span><span class="rstat__value" id="rPD">0</span></div>
+      <div class="rstat"><span class="rstat__label">Ejercicios respondidos</span><span class="rstat__value" id="rAnswered">0 / 30</span></div>
+      <div class="rstat"><span class="rstat__label">Tiempo utilizado</span><span class="rstat__value" id="rTime">00:00</span></div>
+    </div>
+  </div>
+
+  <div class="interp reveal" data-i="4">
+    <p class="interp__level" id="rLevel"></p>
+    <p class="interp__text" id="rText"></p>
+  </div>
+
+  <details class="review reveal" data-i="5">
+    <summary>Detalle de corrección</summary>
+    <table aria-label="Detalle de corrección por ejercicio">
+      <thead><tr><th>Nº</th><th>Su respuesta</th><th>Clave</th><th>Resultado</th></tr></thead>
+      <tbody id="reviewBody"></tbody>
+    </table>
+  </details>
+
+  <p class="reveal" data-i="6"><button class="btn btn--ghost" id="btnRestart">Realizar de nuevo</button></p>
+</section>
+</main>
+
+<!-- Diálogo de confirmación al finalizar -->
+<dialog id="confirmDialog">
+  <h2>¿Finalizar la prueba?</h2>
+  <p id="confirmText"></p>
+  <div class="dialog-row">
+    <button class="btn btn--ghost" id="btnCancelFinish">Seguir respondiendo</button>
+    <button class="btn btn--pen" id="btnConfirmFinish">Finalizar</button>
+  </div>
+</dialog>
+
+<script src="comprension_verbal.js"></script>
+</body>
+</html>
