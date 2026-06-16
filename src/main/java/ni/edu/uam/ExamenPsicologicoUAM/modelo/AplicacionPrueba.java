@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.GenericGenerator;
 import org.openxava.annotations.Hidden;
+import org.openxava.annotations.View;
 
 import javax.persistence.*;
 import java.time.Duration;
@@ -20,6 +21,13 @@ import java.util.Collection;
  * la lógica de calificación (puntuación directa, percentil e interpretación).
  */
 @Entity
+@View(members =
+        "sujeto;" +
+                "cuestionario;" +
+                "fechaAplicacion, horaInicio, estado;" +
+                "puntuacionDirecta, percentil, interpretacion;" +
+                "respuestas"
+)
 @Getter
 @Setter
 @NoArgsConstructor
@@ -137,6 +145,33 @@ public class AplicacionPrueba {
         if (percentil <= 75) return "Promedio/adecuado";
         return "Superior";
     }
+    /**
+     * Puntuación directa para mostrar en la interfaz administrativa.
+     * @return número de aciertos.
+     */
+    @Transient
+    public int getPuntuacionDirecta() {
+        return calcularPuntuacionDirecta();
+    }
 
+    /**
+     * Percentil para mostrar en la interfaz administrativa.
+     * @return percentil, o 0 si la prueba aún no fue calificada.
+     */
+    @Transient
+    public int getPercentil() {
+        if (estado != EstadoAplicacion.FINALIZADO && estado != EstadoAplicacion.CALIFICADO) return 0;
+        return calcularPercentil();
+    }
+
+    /**
+     * Interpretación del desempeño para mostrar en la interfaz administrativa.
+     * @return nivel de desempeño, o un guion si la prueba aún no fue calificada.
+     */
+    @Transient
+    public String getInterpretacion() {
+        if (estado != EstadoAplicacion.FINALIZADO && estado != EstadoAplicacion.CALIFICADO) return "?";
+        return generarInterpretacion();
+    }
 
 }
