@@ -170,6 +170,23 @@ function seleccionar(letra){
  */
 async function iniciarPrueba(){
   const btn = document.getElementById("btnStart");
+  const camposObligatorios = [
+    { id: "fNombre", nombre: "Nombre" },
+    { id: "fPrimerApellido", nombre: "Primer apellido" },
+    { id: "fFechaNacimiento", nombre: "Fecha de nacimiento" },
+    { id: "fSexo", nombre: "Sexo" },
+    { id: "fEstudios", nombre: "Estudios realizados" },
+    { id: "fProfesion", nombre: "Profesión" }
+  ];
+
+  for (const campo of camposObligatorios) {
+    const elemento = document.getElementById(campo.id);
+    if (!elemento.value.trim()) {
+      alert(`Debe completar el campo: ${campo.nombre}`);
+      elemento.focus();
+      return;
+    }
+  }
   btn.disabled = true;
   const textoOriginal = btn.textContent;
   btn.textContent = "Cargando…";
